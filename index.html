@@ -1,61 +1,185 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-<title>广州奶娃学院</title>
-<meta charset="utf-8">
-<meta http-equiv="refresh" content="3;url=https://www.gzmtu.edu.cn">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-    background:#f0f8ff;
-    text-align:center;
-    font-family:system-ui,sans-serif;
-    padding-top:40px;
-}
-.box{
-    max-width:600px;
-    margin:0 auto;
-    background:white;
-    border-radius:16px;
-    padding:30px;
-    box-shadow:0 4px 12px #00000018;
-}
-h1{
-    color:#004494;
-    margin-bottom:16px;
-}
-.desc{
-    font-size:18px;
-    color:#444;
-    margin-bottom:24px;
-}
-.nailong{
-    font-size:120px;
-    margin:20px 0;
-}
-.tip{
-    color:#888;
-    margin-top:20px;
-}
-.btn{
-    display:inline-block;
-    margin-top:16px;
-    padding:12px 28px;
-    background:#004494;
-    color:white;
-    text-decoration:none;
-    border-radius:8px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广州航海学院｜奶龙欢迎你</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", "PingFang SC", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eaf4ff 0%, #f7fbff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 进入按钮点击后的全屏遮罩 */
+        .transition-mask {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+
+        .transition-mask.active {
+            opacity: 1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+            padding: 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .banner-wrap {
+            position: relative;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(34, 75, 141, 0.25);
+            margin-bottom: 32px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1.2s ease forwards;
+        }
+
+        .banner-img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* 奶龙轻微呼吸感 */
+        .banner-wrap::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.35), transparent 45%);
+            animation: glow 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .title {
+            font-size: 28px;
+            color: #224b8d;
+            font-weight: bold;
+            margin-bottom: 14px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.4s forwards;
+        }
+
+        .tip {
+            font-size: 16px;
+            color: #5a6b87;
+            margin-bottom: 36px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.6s forwards;
+        }
+
+        .enter-btn {
+            padding: 15px 48px;
+            background: linear-gradient(135deg, #224b8d, #2f6fc4);
+            color: #fff;
+            border: none;
+            border-radius: 99px;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            cursor: pointer;
+            box-shadow: 0 10px 24px rgba(47, 111, 196, 0.4);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease 0.8s forwards, floatBtn 2.4s ease-in-out 1.8s infinite;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .enter-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(47, 111, 196, 0.5);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes floatBtn {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        @media (max-width: 600px) {
+            .title {
+                font-size: 22px;
+            }
+            .tip {
+                font-size: 14px;
+            }
+            .enter-btn {
+                font-size: 16px;
+                padding: 13px 36px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="box">
-    <h1>🏫 广州奶娃学院</h1>
-    <div class="nailong">🐲</div>
-    <p class="desc">奶龙带你走进校门，前往广州航海学院官网</p>
-    <p>⏳ 3秒后自动跳转...</p>
-    <a class="btn" href="https://www.gzmtu.edu.cn">立刻进入广航官网</a>
-    <p class="tip">趣味跳转页面 · 仅玩梗</p>
-</div>
+
+    <div class="transition-mask" id="transitionMask"></div>
+
+    <div class="container">
+        <div class="banner-wrap">
+            <!-- 把这里的图片地址替换成你自己的图片路径 -->
+            <img class="banner-img" src="https://aka.doubaocdn.com/s/9P2c1vjfgI?alice_filename=nailong-campus-banner.png" alt="奶龙带领进入广州航海学院校门">
+        </div>
+
+        <h1 class="title">欢迎来到广州航海学院</h1>
+        <p class="tip">奶龙带路，一起走进校园 ✨</p>
+
+        <button class="enter-btn" id="enterBtn">进 入 校 园</button>
+    </div>
+
+    <script>
+        const btn = document.getElementById("enterBtn");
+        const mask = document.getElementById("transitionMask");
+
+        btn.addEventListener("click", function () {
+            mask.classList.add("active");
+
+            setTimeout(function () {
+                window.open("https://www.gzmtu.edu.cn/", "_blank");
+                mask.classList.remove("active");
+            }, 700);
+        });
+    </script>
+
 </body>
-</html>
+    </html>
